@@ -8,7 +8,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import ie.setu.nightout.R
-import ie.setu.nightout.databinding.ActivityPlacemarkBinding
+import ie.setu.nightout.databinding.ActivityNightoutBinding
 import ie.setu.nightout.helpers.showImagePicker
 import ie.setu.nightout.main.MainApp
 import ie.setu.nightout.models.Location
@@ -18,7 +18,7 @@ import com.squareup.picasso.Picasso
 import timber.log.Timber.i
 
 class NightOutActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityPlacemarkBinding
+    private lateinit var binding: ActivityNightoutBinding
     private lateinit var imageIntentLauncher: ActivityResultLauncher<Intent>
     private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
     var placemark = PlacemarkModel()
@@ -30,7 +30,7 @@ class NightOutActivity : AppCompatActivity() {
         var edit = false
 
         super.onCreate(savedInstanceState)
-        binding = ActivityPlacemarkBinding.inflate(layoutInflater)
+        binding = ActivityNightoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.toolbarCancel.title = title
@@ -44,7 +44,7 @@ class NightOutActivity : AppCompatActivity() {
             placemark = intent.extras?.getParcelable("placemark_edit")!!
             binding.placemarkTitle.setText(placemark.title)
             binding.description.setText(placemark.description)
-            binding.btnAdd.setText(R.string.save_placemark)
+            binding.btnAdd.setText(R.string.save_location)
             binding.chooseImage.setText(R.string.change_image)
             Picasso.get()
                 .load(placemark.image)

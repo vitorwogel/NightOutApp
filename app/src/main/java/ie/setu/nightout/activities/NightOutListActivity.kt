@@ -11,18 +11,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import ie.setu.nightout.R
 import ie.setu.nightout.adapters.PlacemarkAdapter
 import ie.setu.nightout.adapters.PlacemarkListener
-import ie.setu.nightout.databinding.ActivityPlacemarkListBinding
+import ie.setu.nightout.databinding.ActivityNightoutListBinding
 import ie.setu.nightout.main.MainApp
 import ie.setu.nightout.models.PlacemarkModel
 
 class NightOutListActivity : AppCompatActivity(), PlacemarkListener {
 
     lateinit var app: MainApp
-    private lateinit var binding: ActivityPlacemarkListBinding
+    private lateinit var binding: ActivityNightoutListBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityPlacemarkListBinding.inflate(layoutInflater)
+        binding = ActivityNightoutListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         app = application as MainApp

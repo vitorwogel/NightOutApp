@@ -14,7 +14,7 @@
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/placemarkTitle"
+            android:id="@+id/locationTitle"
             android:layout_width="394dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -25,7 +25,7 @@
             android:id="@+id/description"
             android:layout_width="381dp"
             android:layout_height="39dp"
-            android:layout_below="@id/placemarkTitle"
+            android:layout_below="@id/locationTitle"
             tools:text="A Description" />
 
         <ImageView
@@ -34,7 +34,7 @@
             android:layout_height="64dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
-            android:layout_alignEnd="@id/placemarkTitle"
+            android:layout_alignEnd="@id/locationTitle"
             android:contentDescription="@string/change_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

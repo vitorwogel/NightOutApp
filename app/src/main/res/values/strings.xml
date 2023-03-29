@@ -1,14 +1,14 @@
 <resources>
-    <string name="app_name">Placemark</string>
-    <string name="button_addPlacemark">Add Placemark</string>
-    <string name="hint_placemarkTitle">Placemark Title</string>
+    <string name="app_name">NightOut</string>
+    <string name="button_addLocation">Add Location</string>
+    <string name="hint_locationTitle">Location Title</string>
     <string name="hint_description">Description</string>
-    <string name="menu_addPlacemark">Add</string>
+    <string name="menu_addLocation">Add</string>
     <string name="menu_cancel">Cancel</string>
     <string name="error_handler">Please Enter a title</string>
-    <string name="save_placemark"> Save Placemark </string>
+    <string name="save_location"> Save Location </string>
     <string name="button_addImage"> Add Image </string>
-    <string name="select_placemark_image">Select placemark image</string>
+    <string name="select_location_image">Select location image</string>
     <string name="change_image">Change Image</string>
     <string name="button_location">Set Location</string>
     <string name="title_activity_map">MapActivity</string>
