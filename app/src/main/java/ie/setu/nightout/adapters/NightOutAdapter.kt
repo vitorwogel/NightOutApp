@@ -4,13 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ie.setu.nightout.databinding.CardNightoutBinding
-import ie.setu.nightout.models.PlacemarkModel
+import ie.setu.nightout.models.NightOutModel
 import com.squareup.picasso.Picasso
 
-class PlacemarkAdapter constructor(private var placemarks: List<PlacemarkModel>,
-                                   private val listener: PlacemarkListener
+class NightOutAdapter constructor(private var locations: List<NightOutModel>,
+                                   private val listener: NightOutListener
 ) :
-    RecyclerView.Adapter<PlacemarkAdapter.MainHolder>() {
+    RecyclerView.Adapter<NightOutAdapter.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
         val binding = CardNightoutBinding
@@ -20,21 +20,21 @@ class PlacemarkAdapter constructor(private var placemarks: List<PlacemarkModel>,
     }
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
-        val placemark = placemarks[holder.adapterPosition]
-        holder.bind(placemark, listener)
+        val location = locations[holder.adapterPosition]
+        holder.bind(location, listener)
     }
 
-    override fun getItemCount(): Int = placemarks.size
+    override fun getItemCount(): Int = locations.size
 
     class MainHolder(private val binding : CardNightoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
 
-        fun bind(placemark: PlacemarkModel, listener: PlacemarkListener) {
-            binding.locationTitle.text = placemark.title
-            binding.description.text = placemark.description
-            Picasso.get().load(placemark.image).resize(200,200).into(binding.imageIcon)
-            binding.root.setOnClickListener { listener.onPlacemarkClick(placemark) }
+        fun bind(location: NightOutModel, listener: NightOutListener) {
+            binding.locationTitle.text = location.title
+            binding.description.text = location.description
+            Picasso.get().load(location.image).resize(200,200).into(binding.imageIcon)
+            binding.root.setOnClickListener { listener.onNightOutClick(location) }
         }
 
 
@@ -42,6 +42,6 @@ class PlacemarkAdapter constructor(private var placemarks: List<PlacemarkModel>,
 }
 
 
-interface PlacemarkListener {
-    fun onPlacemarkClick(placemark: PlacemarkModel)
+interface NightOutListener {
+    fun onNightOutClick(location: NightOutModel)
 }

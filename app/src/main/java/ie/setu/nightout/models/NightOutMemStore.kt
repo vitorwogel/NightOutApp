@@ -10,29 +10,29 @@ internal fun getId(): Long {
 
 class NightOutMemStore : NightOutStore {
 
-    val placemarks = ArrayList<PlacemarkModel>()
+    val locations = ArrayList<NightOutModel>()
 
-    override fun findAll(): List<PlacemarkModel> {
-        return placemarks
+    override fun findAll(): List<NightOutModel> {
+        return locations
     }
 
-    override fun create(placemark: PlacemarkModel) {
-        placemark.id = getId()
-        placemarks.add(placemark)
+    override fun create(location: NightOutModel) {
+        location.id = getId()
+        locations.add(location)
         logAll()
     }
 
-    override fun update(placemark: PlacemarkModel) {
-        var foundPlacemark: PlacemarkModel? = placemarks.find { p -> p.id == placemark.id }
-        if (foundPlacemark != null) {
-            foundPlacemark.title = placemark.title
-            foundPlacemark.description = placemark.description
-            foundPlacemark.image = placemark.image
+    override fun update(location: NightOutModel) {
+        var foundLocation: NightOutModel? = locations.find { p -> p.id == location.id }
+        if (foundLocation != null) {
+            foundLocation.title = location.title
+            foundLocation.description = location.description
+            foundLocation.image = location.image
             logAll()
         }
     }
 
     private fun logAll() {
-        placemarks.forEach { i("$it") }
+        locations.forEach { i("$it") }
     }
 }

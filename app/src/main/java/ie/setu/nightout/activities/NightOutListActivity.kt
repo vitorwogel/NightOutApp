@@ -9,13 +9,13 @@ import android.view.MenuItem
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import ie.setu.nightout.R
-import ie.setu.nightout.adapters.PlacemarkAdapter
-import ie.setu.nightout.adapters.PlacemarkListener
+import ie.setu.nightout.adapters.NightOutAdapter
+import ie.setu.nightout.adapters.NightOutListener
 import ie.setu.nightout.databinding.ActivityNightoutListBinding
 import ie.setu.nightout.main.MainApp
-import ie.setu.nightout.models.PlacemarkModel
+import ie.setu.nightout.models.NightOutModel
 
-class NightOutListActivity : AppCompatActivity(), PlacemarkListener {
+class NightOutListActivity : AppCompatActivity(), NightOutListener {
 
     lateinit var app: MainApp
     private lateinit var binding: ActivityNightoutListBinding
@@ -29,7 +29,7 @@ class NightOutListActivity : AppCompatActivity(), PlacemarkListener {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = PlacemarkAdapter(app.placemarks.findAll(),this)
+        binding.recyclerView.adapter = NightOutAdapter(app.locations.findAll(),this)
 
         binding.toolbar.title = title
         setSupportActionBar(binding.toolbar)
@@ -56,13 +56,14 @@ class NightOutListActivity : AppCompatActivity(), PlacemarkListener {
         ) {
             if (it.resultCode == Activity.RESULT_OK) {
                 (binding.recyclerView.adapter)?.
-                notifyItemRangeChanged(0,app.placemarks.findAll().size)
+                notifyItemRangeChanged(0,app.locations.findAll().size)
             }
         }
 
-    override fun onPlacemarkClick(placemark: PlacemarkModel) {
+    override fun onNightOutClick(location: NightOutModel)
+    {
         val launcherIntent = Intent(this, NightOutActivity::class.java)
-        launcherIntent.putExtra("placemark_edit", placemark)
+        launcherIntent.putExtra("loc_edit", location)
         getClickResult.launch(launcherIntent)
     }
 
@@ -72,7 +73,7 @@ class NightOutListActivity : AppCompatActivity(), PlacemarkListener {
         ) {
             if (it.resultCode == Activity.RESULT_OK) {
                 (binding.recyclerView.adapter)?.
-                notifyItemRangeChanged(0,app.placemarks.findAll().size)
+                notifyItemRangeChanged(0,app.locations.findAll().size)
             }
         }
 

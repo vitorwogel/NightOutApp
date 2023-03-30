@@ -1,7 +1,7 @@
 package ie.setu.nightout.models
 
 interface NightOutStore {
-    fun findAll(): List<PlacemarkModel>
-    fun create(placemark: PlacemarkModel)
-    fun update(placemark: PlacemarkModel)
+    fun findAll(): List<NightOutModel>
+    fun create(location: NightOutModel)
+    fun update(location: NightOutModel)
 }

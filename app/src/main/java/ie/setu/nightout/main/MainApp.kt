@@ -7,11 +7,11 @@ import timber.log.Timber.i
 
 class MainApp : Application() {
 
-    val placemarks = NightOutMemStore()
+    val locations = NightOutMemStore()
 
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
-        i("Placemark started")
+        i("NightOut started")
     }
 }

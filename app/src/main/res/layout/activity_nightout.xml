@@ -41,7 +41,7 @@
                 android:orientation="vertical">
 
                 <EditText
-                    android:id="@+id/placemarkTitle"
+                    android:id="@+id/locTitle"
                     android:layout_width="match_parent"
                     android:layout_height="66dp"
                     android:layout_margin="8dp"
@@ -57,9 +57,33 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/description"
                     android:layout_width="match_parent"
-                    android:layout_height="184dp"
+                    android:layout_height="91dp"
                     android:layout_margin="8dp"
                     android:hint="@string/hint_description" />
+
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:contentDescription="@string/rating_bar"
+                    android:numStars="5"
+                    android:rating="0"
+                    android:stepSize="1" />
+
+                <Button
+                    android:id="@+id/locLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:stateListAnimator="@null"
+                    android:text="@string/button_location"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
 
                 <Button
                     android:id="@+id/chooseImage"
@@ -74,23 +98,10 @@
                     android:textSize="16sp"/>
 
                 <ImageView
-                    android:id="@+id/placemarkImage"
+                    android:id="@+id/locImage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:srcCompat="@mipmap/ic_launcher"/>
-
-                <Button
-                    android:id="@+id/placemarkLocation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:background="@color/colorPrimaryDark"
-                    android:paddingBottom="8dp"
-                    android:paddingTop="8dp"
-                    android:stateListAnimator="@null"
-                    android:text="@string/button_location"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16sp"/>
 
                 <Button
                     android:id="@+id/btnAdd"
@@ -105,11 +116,6 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
         </ScrollView>
