@@ -50,11 +50,18 @@ class LoginActivity : AppCompatActivity() {
         if (requestCode == RC_SIGN_IN) {
             val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
-                // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)
-                firebaseAuthWithGoogle(account.idToken!!)
+                // Check if the ID token is not null before passing it to firebaseAuthWithGoogle
+                if (account.idToken != null) {
+                    firebaseAuthWithGoogle(account.idToken!!)
+                } else {
+                    // Handle the case where the ID token is null
+                    Toast.makeText(this, "Failed to sign in with Google. ID token is null.", Toast.LENGTH_SHORT).show()
+                }
             } catch (e: ApiException) {
-                i("Google Login failed")
+                // Handle sign-in failure (e.g. user denied access)
+                i("signInResult:failed code=" + e.statusCode)
+                Toast.makeText(this, "Failed to sign in with Google. Error code: ${e.statusCode}", Toast.LENGTH_SHORT).show()
             }
         }
     }

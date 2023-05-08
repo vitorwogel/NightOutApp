@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.SearchView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import ie.setu.nightout.R
@@ -14,13 +15,13 @@ import ie.setu.nightout.adapters.NightOutListener
 import ie.setu.nightout.databinding.ActivityNightoutListBinding
 import ie.setu.nightout.main.MainApp
 import ie.setu.nightout.models.NightOutModel
+import androidx.recyclerview.widget.RecyclerView
 import timber.log.Timber.i
 
 class NightOutListActivity : AppCompatActivity(), NightOutListener {
 
     lateinit var app: MainApp
     private lateinit var binding: ActivityNightoutListBinding
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,12 +30,28 @@ class NightOutListActivity : AppCompatActivity(), NightOutListener {
 
         app = application as MainApp
 
+        val nightOutAdapter = NightOutAdapter(app.locations.findAll() as MutableList<NightOutModel>,this)
+        binding.recyclerView.adapter = nightOutAdapter
+
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = NightOutAdapter(app.locations.findAll(),this)
 
         binding.toolbar.title = title
         setSupportActionBar(binding.toolbar)
+
+        val searchView = findViewById<SearchView>(R.id.search_view)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                // Handle query submission if needed
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                // Filter the elements based on the new search query
+                nightOutAdapter.filter.filter(newText)
+                return true
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

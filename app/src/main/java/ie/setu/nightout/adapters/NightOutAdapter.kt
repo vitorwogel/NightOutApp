@@ -2,15 +2,20 @@ package ie.setu.nightout.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import ie.setu.nightout.databinding.CardNightoutBinding
 import ie.setu.nightout.models.NightOutModel
 import com.squareup.picasso.Picasso
+import java.util.*
 
-class NightOutAdapter constructor(private var locations: List<NightOutModel>,
+class NightOutAdapter constructor(private var locations: MutableList<NightOutModel>,
                                    private val listener: NightOutListener
 ) :
-    RecyclerView.Adapter<NightOutAdapter.MainHolder>() {
+    RecyclerView.Adapter<NightOutAdapter.MainHolder>(), Filterable {
+
+    private var dataListFiltered: MutableList<NightOutModel> = locations
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
         val binding = CardNightoutBinding
@@ -42,6 +47,33 @@ class NightOutAdapter constructor(private var locations: List<NightOutModel>,
         }
 
 
+    }
+
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val filteredList = mutableListOf<NightOutModel>()
+                if (constraint.isNullOrBlank()) {
+                    filteredList.addAll(locations)
+                } else {
+                    val filterPattern = constraint.toString().toLowerCase(Locale.ROOT).trim()
+                    for (item in locations) {
+                        if (item.title.toLowerCase(Locale.ROOT).contains(filterPattern)) {
+                            filteredList.add(item)
+                        }
+                    }
+                }
+                val results = FilterResults()
+                results.values = filteredList
+                return results
+            }
+
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                dataListFiltered.clear()
+                dataListFiltered.addAll(results?.values as MutableList<NightOutModel>)
+                notifyDataSetChanged()
+            }
+        }
     }
 }
 
