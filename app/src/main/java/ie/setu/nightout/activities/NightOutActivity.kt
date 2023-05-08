@@ -20,7 +20,6 @@ import ie.setu.nightout.models.Location
 import ie.setu.nightout.models.NightOutModel
 import timber.log.Timber.i
 
-
 class NightOutActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNightoutBinding
     private lateinit var imageIntentLauncher: ActivityResultLauncher<Intent>
@@ -66,9 +65,9 @@ class NightOutActivity : AppCompatActivity() {
                     .show()
             } else {
                 if (edit) {
-                    app.locations.update(location.copy())
+                    app.places.update(location.copy())
                 } else {
-                    app.locations.create(location.copy())
+                    app.places.create(location.copy())
                 }
             }
             setResult(RESULT_OK)
@@ -82,7 +81,7 @@ class NightOutActivity : AppCompatActivity() {
         registerImagePickerCallback()
 
         binding.chooseImage.setOnClickListener {
-            showImagePicker(imageIntentLauncher)
+            showImagePicker(imageIntentLauncher,this)
         }
 
         registerMapCallback()
@@ -131,10 +130,16 @@ class NightOutActivity : AppCompatActivity() {
                     RESULT_OK -> {
                         if (result.data != null) {
                             i("Got Result ${result.data!!.data}")
-                            location.image = result.data!!.data!!
+
+                            val image = result.data!!.data!!
+                            contentResolver.takePersistableUriPermission(image,
+                                Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                            location.image = image
+
                             Picasso.get()
                                 .load(location.image)
                                 .into(binding.locImage)
+                            binding.chooseImage.setText(R.string.change_image)
                         } // end of if
                     }
                     RESULT_CANCELED -> { } else -> { }

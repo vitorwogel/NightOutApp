@@ -30,7 +30,7 @@ class NightOutListActivity : AppCompatActivity(), NightOutListener {
 
         app = application as MainApp
 
-        val nightOutAdapter = NightOutAdapter(app.locations.findAll() as MutableList<NightOutModel>,this)
+        val nightOutAdapter = NightOutAdapter(app.places.findAll() as MutableList<NightOutModel>,this)
         binding.recyclerView.adapter = nightOutAdapter
 
         val layoutManager = LinearLayoutManager(this)
@@ -75,7 +75,7 @@ class NightOutListActivity : AppCompatActivity(), NightOutListener {
         ) {
             if (it.resultCode == Activity.RESULT_OK) {
                 (binding.recyclerView.adapter)?.
-                notifyItemRangeChanged(0,app.locations.findAll().size)
+                notifyItemRangeChanged(0,app.places.findAll().size)
             }
         }
 
@@ -92,7 +92,7 @@ class NightOutListActivity : AppCompatActivity(), NightOutListener {
         ) {
             if (it.resultCode == Activity.RESULT_OK) {
                 (binding.recyclerView.adapter)?.
-                notifyItemRangeChanged(0,app.locations.findAll().size)
+                notifyItemRangeChanged(0,app.places.findAll().size)
             }
         }
 
