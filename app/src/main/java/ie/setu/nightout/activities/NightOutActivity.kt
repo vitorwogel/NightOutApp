@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.RatingBar
 import android.widget.RatingBar.OnRatingBarChangeListener
+import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -27,8 +28,7 @@ class NightOutActivity : AppCompatActivity() {
     var location = NightOutModel()
     lateinit var app: MainApp
     var actuaLocation = Location(-22.9587255,-44.3069911,15f)
-    //private var mRating = 0
-    //val ratingBar = findViewById<RatingBar>(R.id.ratingBar)
+    private var mRating = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -54,11 +54,13 @@ class NightOutActivity : AppCompatActivity() {
             Picasso.get()
                 .load(location.image)
                 .into(binding.locImage)
+            binding.ratingBar.numStars = mRating
         }
 
         binding.btnAdd.setOnClickListener() {
             location.title = binding.locTitle.text.toString()
             location.description = binding.description.text.toString()
+            location.rating = mRating
             if (location.title.isEmpty()) {
                 Snackbar.make(it,R.string.error_handler, Snackbar.LENGTH_LONG)
                     .show()
@@ -90,10 +92,13 @@ class NightOutActivity : AppCompatActivity() {
                 .putExtra("location", actuaLocation)
             mapIntentLauncher.launch(launcherIntent)
         }
-        /*
-        ratingBar.onRatingBarChangeListener =
-            OnRatingBarChangeListener { ratingBar, rating, fromUser -> mRating = rating.toInt() }
-        */
+
+        val ratingBar = findViewById<RatingBar>(R.id.ratingBar)
+        ratingBar.setOnRatingBarChangeListener { _, rating, _ ->
+            mRating = rating.toInt()
+        }
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -14,11 +14,13 @@ import ie.setu.nightout.adapters.NightOutListener
 import ie.setu.nightout.databinding.ActivityNightoutListBinding
 import ie.setu.nightout.main.MainApp
 import ie.setu.nightout.models.NightOutModel
+import timber.log.Timber.i
 
 class NightOutListActivity : AppCompatActivity(), NightOutListener {
 
     lateinit var app: MainApp
     private lateinit var binding: ActivityNightoutListBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

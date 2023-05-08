@@ -15,9 +15,10 @@
 
         <TextView
             android:id="@+id/locationTitle"
-            android:layout_width="394dp"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
+            android:layout_marginTop="16dp"
             android:textSize="30sp"
             tools:text="A Title" />
 
@@ -32,14 +33,25 @@
             android:id="@+id/imageIcon"
             android:layout_width="64dp"
             android:layout_height="64dp"
+            android:layout_alignEnd="@id/ratingTextView"
             android:layout_marginTop="4dp"
-            android:layout_marginEnd="16dp"
-            android:layout_alignEnd="@id/locationTitle"
+            android:layout_marginEnd="-100dp"
             android:contentDescription="@string/change_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/ratingTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@id/locationTitle"
+            android:text="Rating"
+            android:textSize="24sp"
+            android:gravity="center_vertical"
+            android:drawableEnd="@drawable/star"
+            android:drawablePadding="4dp" />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

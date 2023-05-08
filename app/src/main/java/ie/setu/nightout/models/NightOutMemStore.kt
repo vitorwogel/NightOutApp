@@ -28,6 +28,7 @@ class NightOutMemStore : NightOutStore {
             foundLocation.title = location.title
             foundLocation.description = location.description
             foundLocation.image = location.image
+            foundLocation.rating = location.rating
             logAll()
         }
     }

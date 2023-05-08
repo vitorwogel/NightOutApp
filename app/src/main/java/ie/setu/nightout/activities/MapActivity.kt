@@ -16,12 +16,14 @@ import com.google.android.gms.maps.model.MarkerOptions
 import ie.setu.nightout.databinding.ActivityMapBinding
 import ie.setu.nightout.models.Location
 import com.google.android.gms.maps.model.Marker
+import timber.log.Timber.i
 
 class MapActivity : AppCompatActivity(), OnMapReadyCallback,  GoogleMap.OnMarkerDragListener {
 
     private lateinit var map: GoogleMap
     private lateinit var binding: ActivityMapBinding
     private var location = Location()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,8 +54,9 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback,  GoogleMap.OnMarker
         finish()
         super.onBackPressed()
     }
-    override fun onMarkerDrag(p0: Marker) {
-        TODO("Not yet implemented")
+    override fun onMarkerDrag(marker: Marker) {
+        location.lat = marker.position.latitude
+        location.lng = marker.position.longitude
     }
 
     override fun onMarkerDragEnd(marker: Marker) {
@@ -62,7 +65,8 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback,  GoogleMap.OnMarker
         location.zoom = map.cameraPosition.zoom
     }
 
-    override fun onMarkerDragStart(p0: Marker) {
-        TODO("Not yet implemented")
+    override fun onMarkerDragStart(marker: Marker) {
+        location.lat = marker.position.latitude
+        location.lng = marker.position.longitude
     }
 }

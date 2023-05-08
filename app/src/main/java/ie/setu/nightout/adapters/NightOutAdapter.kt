@@ -31,9 +31,13 @@ class NightOutAdapter constructor(private var locations: List<NightOutModel>,
 
 
         fun bind(location: NightOutModel, listener: NightOutListener) {
+            if (location.title.length > 14) {
+                location.title = location.title.substring(0, 11) + "..."
+            }
             binding.locationTitle.text = location.title
             binding.description.text = location.description
             Picasso.get().load(location.image).resize(200,200).into(binding.imageIcon)
+            binding.ratingTextView.text = location.rating.toString()
             binding.root.setOnClickListener { listener.onNightOutClick(location) }
         }
 
