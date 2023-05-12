@@ -16,6 +16,11 @@ class NightOutAdapter constructor(private var locations: MutableList<NightOutMod
     RecyclerView.Adapter<NightOutAdapter.MainHolder>(), Filterable {
 
     private var dataListFiltered: MutableList<NightOutModel> = locations
+    private val originalNightOutList = mutableListOf<NightOutModel>()
+
+    init {
+        originalNightOutList.addAll(dataListFiltered)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
         val binding = CardNightoutBinding
@@ -53,26 +58,35 @@ class NightOutAdapter constructor(private var locations: MutableList<NightOutMod
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val filteredList = mutableListOf<NightOutModel>()
-                if (constraint.isNullOrBlank()) {
-                    filteredList.addAll(locations)
+
+                if (constraint.isNullOrEmpty()) {
+                    filteredList.addAll(originalNightOutList)
                 } else {
-                    val filterPattern = constraint.toString().toLowerCase(Locale.ROOT).trim()
-                    for (item in locations) {
-                        if (item.title.toLowerCase(Locale.ROOT).contains(filterPattern)) {
+                    val filterPattern = constraint.toString().toLowerCase(Locale.getDefault()).trim()
+
+                    for (item in originalNightOutList) {
+                        if (item.title.toLowerCase(Locale.getDefault()).contains(filterPattern)) {
                             filteredList.add(item)
                         }
                     }
                 }
+
                 val results = FilterResults()
                 results.values = filteredList
                 return results
             }
 
+
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                dataListFiltered.clear()
-                dataListFiltered.addAll(results?.values as MutableList<NightOutModel>)
+                locations.clear()
+                if (results?.values != null) {
+                    locations.addAll(results.values as List<NightOutModel>)
+                } else {
+                    locations.addAll(originalNightOutList)
+                }
                 notifyDataSetChanged()
             }
+
         }
     }
 }

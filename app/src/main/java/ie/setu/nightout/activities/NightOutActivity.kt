@@ -26,7 +26,7 @@ class NightOutActivity : AppCompatActivity() {
     private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
     var location = NightOutModel()
     lateinit var app: MainApp
-    var actuaLocation = Location(-22.9587255,-44.3069911,15f)
+    var actuaLocation = Location(52.248651, -7.114551,15f)
     private var mRating = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +41,25 @@ class NightOutActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbarCancel)
 
         app = application as MainApp
-        i("NightOut Activity started...")
+
+        registerImagePickerCallback()
+
+        binding.chooseImage.setOnClickListener {
+            showImagePicker(imageIntentLauncher,this)
+        }
+
+        registerMapCallback()
+
+        binding.locLocation.setOnClickListener {
+            val launcherIntent = Intent(this, MapActivity::class.java)
+                .putExtra("location", actuaLocation)
+            mapIntentLauncher.launch(launcherIntent)
+        }
+
+        val ratingBar = findViewById<RatingBar>(R.id.ratingBar)
+        ratingBar.setOnRatingBarChangeListener { _, rating, _ ->
+            mRating = rating.toInt()
+        }
 
         if (intent.hasExtra("loc_edit")) {
             edit = true
@@ -73,31 +91,6 @@ class NightOutActivity : AppCompatActivity() {
             setResult(RESULT_OK)
             finish()
         }
-
-        binding.locLocation.setOnClickListener {
-            i ("Set Location Pressed")
-        }
-
-        registerImagePickerCallback()
-
-        binding.chooseImage.setOnClickListener {
-            showImagePicker(imageIntentLauncher,this)
-        }
-
-        registerMapCallback()
-
-        binding.locLocation.setOnClickListener {
-            val launcherIntent = Intent(this, MapActivity::class.java)
-                .putExtra("location", actuaLocation)
-            mapIntentLauncher.launch(launcherIntent)
-        }
-
-        val ratingBar = findViewById<RatingBar>(R.id.ratingBar)
-        ratingBar.setOnRatingBarChangeListener { _, rating, _ ->
-            mRating = rating.toInt()
-        }
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

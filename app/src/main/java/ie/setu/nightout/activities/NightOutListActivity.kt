@@ -47,10 +47,14 @@ class NightOutListActivity : AppCompatActivity(), NightOutListener {
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                // Filter the elements based on the new search query
-                nightOutAdapter.filter.filter(newText)
+                if (newText.isEmpty()) {
+                    nightOutAdapter.filter.filter(null)
+                } else {
+                    nightOutAdapter.filter.filter(newText)
+                }
                 return true
             }
+
         })
     }
 

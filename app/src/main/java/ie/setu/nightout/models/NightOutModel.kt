@@ -9,7 +9,8 @@ data class NightOutModel(var id: Long = 0,
                           var title: String = "",
                           var description: String = "",
                           var image: Uri = Uri.EMPTY,
-                          var rating: Int = 0) : Parcelable
+                          var rating: Int = 0,
+                          var type: String = "") : Parcelable
 
 @Parcelize
 data class Location(var lat: Double = 0.0,

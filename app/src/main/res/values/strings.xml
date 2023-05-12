@@ -17,4 +17,7 @@
     <string name="password_hint">Password</string>
     <string name="login_button">Login</string>
     <string name="register_button">Register</string>
+    <string name="toolbar">Toolbar</string>
+    <string name="dropdown">Dropdown Menu</string>
+    <string name="menu_back">Back</string>
 </resources>
